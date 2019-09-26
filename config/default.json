@@ -1,5 +1,5 @@
 {
-  "mongoURI": "mongodb://localhost/OAuthdave",
+  "mongoURI": "mongodb://localhost/newsDb",
   "clientID": "48860783374-ea1tomi1ivd5m7314l87su0tujlq87q1.apps.googleusercontent.com",
   "clientSecret": "lRHyVZOCzjzOgfKuwzZwMz62",
   "FbClientID": "249119367775551",

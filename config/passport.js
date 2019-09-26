@@ -3,14 +3,10 @@ const JwtStrategy = require("passport-jwt").Strategy;
 const { ExtractJwt } = require("passport-jwt");
 const GooglePlusTokenStrategy = require("passport-google-id-token");
 const FacebookTokenStrategy = require("passport-facebook-token");
-const { JWT_SECRET } = require("../config/jwt");
+const { JWT_SECRET } = require("./jwt");
 const Usermodel = require("../models/user");
-
 const config = require("config");
-// const clientID = config.get('clientID');
-// const clientSecret = config.get('clientSecret');
 
-//JWT Strategy
 passport.use(
   new JwtStrategy(
     {
@@ -19,10 +15,8 @@ passport.use(
     },
     async (payload, done) => {
       try {
-        //get the user token
         const user = await Usermodel.findById(payload.sub);
 
-        //handle if the user not exists.
         if (!user) {
           return done(null, false);
         }
@@ -73,8 +67,6 @@ passport.use(
     }
   )
 );
-
-// facebook strategy:
 
 passport.use(
   "facebookToken",
