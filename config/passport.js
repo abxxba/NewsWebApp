@@ -1,10 +1,10 @@
 const passport = require("passport");
 const JwtStrategy = require("passport-jwt").Strategy;
 const { ExtractJwt } = require("passport-jwt");
-const GooglePlusTokenStrategy = require("passport-google-id-token");
+const GoogleTokenStrategy = require("passport-google-id-token");
 const FacebookTokenStrategy = require("passport-facebook-token");
 const { JWT_SECRET } = require("./jwt");
-const Usermodel = require("../models/user");
+const User = require("../model/user");
 const config = require("config");
 
 passport.use(
@@ -30,7 +30,38 @@ passport.use(
   )
 );
 
-// google Strategy
+passport.use(
+  "googleToken",
+  new GoogleTokenStrategy(
+    {
+      clientID: config.clientID
+    },
+    function(parsedToken, googleId, done) {
+      try {
+        /* if user already exists */
+        User.findOne({ "google.id": googleId }, function(err, user) {
+          return done(err, user);
+        });
+
+        //create new account
+        const newUser = new User({
+          method: "google",
+          google: {
+            name: parsedToken.payload.name,
+            id: googleId,
+            email: parsedToken.payload.email,
+            image: parsedToken.payload.picture
+          }
+        });
+        newUser.save();
+        done(null, newUser);
+      } catch (error) {
+        done(error, false, error.message);
+      }
+    }
+  )
+);
+/* // google Strategy
 passport.use(
   "googleToken",
   new GooglePlusTokenStrategy(
@@ -66,9 +97,9 @@ passport.use(
       }
     }
   )
-);
+); */
 
-passport.use(
+/* passport.use(
   "facebookToken",
   new FacebookTokenStrategy(
     {
@@ -99,4 +130,4 @@ passport.use(
       }
     }
   )
-);
+); */
