@@ -1,6 +1,6 @@
 {
   "mongoURI": "mongodb://localhost/newsDb",
   "clientID": "24562798768-o8dv5t3noertd8ig95ghbnco5ipf2g1u.apps.googleusercontent.com",
-  "FbClientID": "",
-  "FbClientSecret": ""
+  "FbClientID": "56c35c947a15c09fd9826688a352c627",
+  "FbClientSecret": "2920d0041bb39ebb81a0ef8d91ef075e"
 }
