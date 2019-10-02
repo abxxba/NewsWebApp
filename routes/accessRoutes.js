@@ -10,11 +10,7 @@ router.get("/profile", passportJWT, (req, res) => {
   console.log("User Sucessfully Authenticated With JWT");
   return res.json(req.user);
 });
-router.get("/categories", (req, res) => {
-  CategoryModel.find({}).then(categories => {
-    res.json(categories);
-  });
-});
+
 router.get("/logout", passportJWT, (req, res) => {
   const sate = { isActive: false };
   UserModel.findByIdAndUpdate(

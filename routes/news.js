@@ -19,6 +19,15 @@ router.get("/", (req, res) => {
       }
     });
 });
+/* get single news */
+router.get("/inc-view/:id", (req, res) => {
+  NewsModel.findByIdAndUpdate(req.params.id).then(news => {
+    const views = news.view * 1 + 1;
+    news.view = views;
+    news.save();
+    res.json(news);
+  });
+});
 /* post route for news */
 router.post("/", (req, res) => {
   /* TODO: VALIDATION */

@@ -15,6 +15,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 //Routes
 app.use("/users", require("./routes/auth.js"));
 app.use("/news", require("./routes/news"));
+app.use("/category", require("./routes/category"));
 app.use(require("./routes/accessRoutes"));
 // Start the server
 const port = process.env.PORT || 5000;
