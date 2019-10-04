@@ -1,8 +1,13 @@
 const express = require("express");
 const router = express.Router();
+const path = require("path");
+const multer = require("multer");
+const sharp = require("sharp");
 const NewsModel = require("../model/news");
 const SourceModel = require("../model/source");
 const CategoryModel = require("../model/category");
+const config = require("config");
+const { uploadImage } = require("../controllers/news");
 
 /* get news */
 router.get("/", (req, res) => {
@@ -19,6 +24,7 @@ router.get("/", (req, res) => {
       }
     });
 });
+
 /* get single news */
 router.get("/inc-view/:id", (req, res) => {
   NewsModel.findByIdAndUpdate(req.params.id).then(news => {
@@ -98,5 +104,49 @@ router.post("/category", (req, res) => {
     }
   });
 });
+
+/* image uploading route */
+router.post("/upload-image/:id", (req, res) => {
+  try {
+    upload(req, res, err => {
+      if (err) {
+        if (typeof err == "string") {
+          res.json(err);
+        } else {
+          res.json(err);
+        }
+      } else {
+        let image = null;
+
+        if (req.files) {
+          let app_url = req.headers.origin;
+
+          filename = path.basename(req.files[0].path);
+
+          var resizer = sharp()
+            .resize(600)
+            .toFile("public/files/resizedimages/" + filename, (err, info) => {
+              console.log("err: ", err);
+
+              console.log("info: ", info);
+            });
+
+          const imageSize = (app_url + "/" + req.files[0].path).pipe(resizer);
+          console.log("imageSize", imageSize);
+
+          if (filename) {
+            image = "public/samll/" + filename;
+            res.json(image);
+          }
+        }
+      }
+    });
+  } catch (err) {
+    return res.json({ err: err, message: "File could not upload" });
+  }
+});
+
+router.post("/add-image/:id", uploadImage);
+
 
 module.exports = router;

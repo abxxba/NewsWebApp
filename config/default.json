@@ -2,5 +2,19 @@
   "mongoURI": "mongodb://localhost/newsDb",
   "clientID": "24562798768-o8dv5t3noertd8ig95ghbnco5ipf2g1u.apps.googleusercontent.com",
   "FbClientID": "56c35c947a15c09fd9826688a352c627",
-  "FbClientSecret": "2920d0041bb39ebb81a0ef8d91ef075e"
+  "FbClientSecret": "2920d0041bb39ebb81a0ef8d91ef075e",
+
+  "MaxImgeSize": "10000000",
+
+  "ImageLarge_Width": 1280,
+  "ImageLarge_Height": 750,
+  "_dirLargeImage": "large",
+
+  "ImageMedium_Width": 640,
+  "ImageMedium_Height": 480,
+  "_dirMediumImage": "medium",
+
+  "ImageSmall_Width": 320,
+  "ImageSmall_Height": 240,
+  "_dirSmallImage": "thumbnail"
 }

@@ -1,0 +1,74 @@
+<%include ./partials/header%>
+
+<main class="container-fluid px-0 g-pt-65">
+  <div class="row no-gutters g-pos-rel g-overflow-x-hidden">
+    <%include ./partials/side_nav%>
+    <div class="col g-ml-45 g-ml-0--lg g-pb-65--md">
+      <div class="g-pa-20">
+        <header class="g-mb-20">
+          <div class="media">
+            <div class="d-flex align-self-center">
+              <h1 class="g-font-weight-300 g-font-size-28 g-color-black mb-0">
+                User Contacts
+              </h1>
+            </div>
+
+            <div class="media-body align-self-center text-right">
+              <a
+                class="btn btn-xl u-btn-secondary g-width-160--md g-font-size-default g-ml-10"
+                href="/admin/new"
+              >
+                <i class="hs-admin-plus"></i> Add New
+              </a>
+            </div>
+          </div>
+        </header>
+        <hr class="d-flex g-brd-gray-light-v7 g-my-30" />
+
+        <div class="table-responsive g-mb-40">
+          <table class="table u-table--v3 g-color-black">
+            <thead>
+              <tr>
+                <th class="g-px-30">
+                  <div class="media">
+                    <div class="d-flex align-self-center">Name</div>
+                  </div>
+                </th>
+                <th class="g-px-30">
+                  <div class="media">
+                    <div class="d-flex align-self-center">Email</div>
+                  </div>
+                </th>
+                <th class="g-px-30">
+                  <div class="media">
+                    <div class="d-flex align-self-center">Added date</div>
+                  </div>
+                </th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <%admins.forEach(function(admin){%>
+              <tr>
+                <td class="g-px-30">
+                  <div class="media">
+                    <div class="media-body align-self-center text-left">
+                      <%=admin.ceo%>
+                    </div>
+                  </div>
+                </td>
+                <td class="g-px-30"><%=admin.email%></td>
+                <td class="g-px-30">
+                  <%=admin.date.toDateString()%>
+                </td>
+              </tr>
+              <%})%>
+            </tbody>
+          </table>
+        </div>
+
+        <%include ./partials/footer%>
+      </div>
+    </div>
+  </div>
+</main>

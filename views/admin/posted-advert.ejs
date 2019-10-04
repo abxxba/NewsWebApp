@@ -1,0 +1,77 @@
+<%include ./partials/header%>
+
+<main class="container-fluid px-0 g-pt-65">
+  <div class="row no-gutters g-pos-rel g-overflow-x-hidden">
+    <%include ./partials/side_nav%>
+    <div class="col g-ml-45 g-ml-0--lg g-pb-65--md">
+      <div class="g-pa-20">
+        <header class="g-mb-20">
+          <div class="media">
+            <div class="d-flex align-self-center">
+              <h1 class="g-font-weight-300 g-font-size-28 g-color-black mb-0">
+                Messages
+              </h1>
+            </div>
+          </div>
+        </header>
+        <hr class="d-flex g-brd-gray-light-v7 g-my-30" />
+
+        <div class="table-responsive g-mb-40">
+          <table class="table u-table--v3 g-color-black table-hover">
+            <thead>
+              <tr>
+                <th class="g-px-30">
+                  <div class="media">
+                    <div class="d-flex align-self-center">Company name</div>
+                  </div>
+                </th>
+                <th class="g-px-30">
+                  <div class="media">
+                    <div class="d-flex align-self-center">Hyper link</div>
+                  </div>
+                </th>
+
+                <th class="g-px-30">
+                  <div class="media">
+                    <div class="d-flex align-self-center">Posted date</div>
+                  </div>
+                </th>
+                <th class="g-px-30">
+                    <div class="media">
+                      <div class="d-flex align-self-center">Action</div>
+                    </div>
+                  </th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <%advert.forEach(function(ad){%>
+              <tr>
+                <td class="g-px-30">
+                  <div class="media">
+                    <div class="media-body align-self-center text-left">
+                      
+                        <%=ad.company_name%></a
+                      >
+                    </div>
+                  </div>
+                </td>
+
+                <td class="g-px-30"><%=ad.href%></td>
+                <td class="g-px-30">
+                  <%=ad.date.toDateString()%>
+                </td>
+                <td class="g-px-30">
+                  <a href="/admin/advertisment/delete/<%=ad._id%>" style="font-size: 18px"> <i class="hs-admin-trash"></i>  </a>
+                </td>
+              </tr>
+              <%})%>
+            </tbody>
+          </table>
+        </div>
+
+        <%include ./partials/footer%>
+      </div>
+    </div>
+  </div>
+</main>

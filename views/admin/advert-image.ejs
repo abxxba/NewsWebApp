@@ -1,0 +1,119 @@
+<%include ./partials/header%>
+
+<main class="container-fluid px-0 g-pt-65">
+  <div class="row no-gutters g-pos-rel g-overflow-x-hidden">
+    <%include ./partials/side_nav%>
+    <div class="col g-ml-45 g-ml-0--lg g-pb-65--md">
+      <div class="g-pa-20">
+        <header class="g-mb-20">
+          <div class="media">
+            <div class="d-flex align-self-center">
+              <h1 class="g-font-weight-300 g-font-size-28 g-color-black mb-0">
+                Advertisment
+              </h1>
+            </div>
+          </div>
+        </header>
+        <hr class="d-flex g-brd-gray-light-v7 g-my-30" />
+        <div class="row">
+          <div class="col-md-3 col-sm-3">
+            <img
+              src="<%=advert.image%>"
+              style="border: 1px  solid  rgb(233, 233, 233);margin: 4px; border-radius: 10px; padding: 4px;
+               box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);"
+            />
+          </div>
+          <div class="col-md-9 col-sm-9">
+            <div
+              class="h-100 g-brd-around g-brd-gray-light-v7 g-rounded-4 g-pa-15 g-pa-20--md"
+            >
+              <header>
+                <h2
+                  class="text-uppercase g-font-size-12 g-font-size-default--md g-color-black mb-0"
+                >
+                  Add image for advertisment
+                </h2>
+                <br />
+                <span class="text-muted"
+                  >Recomended images size - (1920 x 790)</span
+                >
+              </header>
+
+              <hr class="d-flex g-brd-gray-light-v7 g-my-15 g-my-11--md" />
+              <form
+                action="/admin/advertisment/image/<%=advert._id%>"
+                method="POST"
+                enctype="multipart/form-data"
+              >
+                <div class="row g-mb-20">
+                  <div class="col-md-3 align-self-center g-mb-5 g-mb-0--md">
+                    <label class="mb-0" for="#name"
+                      ><b>Advertisment Image </b></label
+                    >
+                  </div>
+
+                  <div class="col-md-9 align-self-center">
+                    <div class="form-group g-pos-rel mb-0 has-success">
+                      <span
+                        class="g-pos-abs g-top-0 g-right-0 d-block g-width-40 h-100 opacity-0 g-opacity-1--success"
+                      >
+                      </span>
+                      <input
+                        id="image"
+                        name="image"
+                        required="true"
+                        class="form-control h-100 form-control-md g-brd-gray-light-v7 g-brd-lightblue-v3--focus g-brd-primary--error g-rounded-4 g-px-20 g-py-12"
+                        type="file"
+                      />
+                    </div>
+                    <button
+                      style="float:right"
+                      class="btn btn-md g-mt-10 btn-sm--md u-btn-secondary g-width-100--md g-font-size-12 g-font-size-default--md "
+                      type="submit"
+                    >
+                      Upload
+                    </button>
+                  </div>
+                </div>
+              </form>
+              <div class="row">
+                <div class="col-md-12">
+                  <div
+                    class="h-100 g-brd-around g-brd-gray-light-v7 g-rounded-4 g-pa-15 g-pa-20--md"
+                  >
+                    
+                      <header>
+                        <h2
+                          class="text-uppercase g-font-size-12 g-font-size-default--md g-color-black mb-0"
+                        >
+                         <%=advert.company_name%>
+                        </h2>
+                      </header>
+
+                      <hr
+                        class="d-flex g-brd-gray-light-v7 g-my-15 g-my-30--md"
+                      />
+
+                      <div class="row g-mb-20">
+                        <%=advert.description%>
+                      </div>
+
+                      <hr
+                        class="d-flex g-brd-gray-light-v7 g-my-15 g-my-30--md"
+                      />
+
+                      <div></div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+              <div></div>
+            </div>
+          </div>
+        </div>
+
+        <%include ./partials/footer%>
+      </div>
+    </div>
+  </div>
+</main>

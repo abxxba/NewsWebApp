@@ -1,0 +1,97 @@
+<%include ./partials/header%>
+
+<main class="container-fluid px-0 g-pt-65">
+  <div class="row no-gutters g-pos-rel g-overflow-x-hidden">
+    <%include ./partials/side_nav%>
+    <div class="col g-ml-45 g-ml-0--lg g-pb-65--md">
+      <div class="g-pa-20">
+        <header class="g-mb-20">
+          <div class="media">
+            <div class="d-flex align-self-center">
+              <h1 class="g-font-weight-300 g-font-size-28 g-color-black mb-0">
+                User Contacts
+              </h1>
+            </div>
+
+            <div class="media-body align-self-center text-right">
+              <a
+                class="btn btn-xl u-btn-secondary g-width-160--md g-font-size-default g-ml-10"
+                href="/admin/customer/new"
+              >
+                <i class="hs-admin-plus"></i> Add New
+              </a>
+            </div>
+          </div>
+        </header>
+        <hr class="d-flex g-brd-gray-light-v7 g-my-30" />
+
+        <div class="table-responsive g-mb-40">
+          <table class="table u-table--v3 g-color-black">
+            <thead>
+              <tr>
+                <th class="g-px-30">
+                  <div class="media">
+                    <div class="d-flex align-self-center">Company Name</div>
+                  </div>
+                </th>
+                <th class="g-px-30">
+                  <div class="media">
+                    <div class="d-flex align-self-center">CEO</div>
+                  </div>
+                </th>
+                <th class="g-px-30">
+                  <div class="media">
+                    <div class="d-flex align-self-center">Contact</div>
+                  </div>
+                </th>
+                <th class="g-px-30">
+                  <div class="media">
+                    <div class="d-flex align-self-center">Company Type</div>
+                  </div>
+                </th>
+                <th class="g-px-30"></th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <%customers.forEach(function(customer){%>
+              <tr>
+                <td class="g-px-30">
+                  <div class="media">
+                    <div class="media-body align-self-center text-left">
+                      <%=customer.company_name%>
+                    </div>
+                  </div>
+                </td>
+                <td class="g-px-30"><%=customer.ceo%></td>
+                <td class="g-px-30"><%=customer.email%></td>
+                <td class="g-px-30">
+                  <%=customer.type%>
+                </td>
+                <td class="g-px-30">
+                  <a
+                    href="/admin/customer/<%=customer._id%>/products"
+                    class="d-inline-block"
+                    style="text-decoration: none"
+                  >
+                    <span
+                      class="d-flex align-items-center justify-content-center u-tags-v1 g-brd-around g-bg-gray-light-v8 g-bg-gray-light-v8 g-font-size-default g-color-gray-dark-v6 g-rounded-50 g-py-4 g-px-15"
+                    >
+                      <span
+                        class="u-badge-v2--md g-pos-stc g-transform-origin--top-left g-bg-lightblue-v3 g-mr-8"
+                      ></span>
+                      View Products
+                    </span>
+                  </a>
+                </td>
+              </tr>
+              <%})%>
+            </tbody>
+          </table>
+        </div>
+
+        <%include ./partials/footer%>
+      </div>
+    </div>
+  </div>
+</main>

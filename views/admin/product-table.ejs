@@ -1,0 +1,91 @@
+<%include ./partials/header%>
+
+<main class="container-fluid px-0 g-pt-65">
+  <div class="row no-gutters g-pos-rel g-overflow-x-hidden">
+    <%include ./partials/side_nav%>
+    <div class="col g-ml-45 g-ml-0--lg g-pb-65--md">
+      <div class="g-pa-20">
+        <header class="g-mb-20">
+          <div class="media">
+            <div class="d-flex align-self-center">
+              <h1 class="g-font-weight-300 g-font-size-28 g-color-black mb-0">
+                Products
+              </h1>
+            </div>
+          </div>
+        </header>
+        <hr class="d-flex g-brd-gray-light-v7 g-my-30" />
+        <%if(Object.keys(products).length > 0) {%>
+        <div class="table-responsive g-mb-40">
+          <table class="table u-table--v3 g-color-black">
+            <thead>
+              <tr>
+                <th>Product</th>
+                <th>Category</th>
+                <th>Post Duration</th>
+                <th>Package</th>
+                <th>Status</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <%products.forEach(function(product){%>
+              <tr>
+                <td>
+                  <div
+                    class="d-flex align-items-center u-link-v5 g-color-black g-color-secondary--hover g-color-secondary--opened"
+                  >
+                    <img
+                      class="g-width-55 g-height-55 rounded-circle"
+                      src=" /uploads/<%=product.image%>"
+                      alt="<%=product.item_name%>"
+                    />
+                    &nbsp;
+                    <span class="g-hidden-sm-down">
+                      <%=product.item_name%></span
+                    >
+                  </div>
+                </td>
+
+                <td><div><%=product.category%></div></td>
+
+                <td><%=product.post_duration%></td>
+
+                <td>
+                  <%=product.package%>
+                </td>
+                <td>
+                  <span
+                    class="u-tags-v1 text-center g-width-110 g-brd-around g-brd-teal-v2 g-bg-teal-v2 g-font-weight-400 g-color-white g-rounded-50 g-py-4 g-px-15"
+                  >
+                    <%=product.status%></span
+                  >
+                </td>
+                <td>
+                  <div class="vol-md-6">
+                    <a
+                      class="d-flex align-items-center u-link-v5 g-bg-gray-light-v8--hover g-font-size-12 g-font-size-default--md g-color-gray-dark-v6 g-px-25 g-py-14"
+                      href="/admin/product/delete/<%=product._id%>"
+                    >
+                      <i
+                        class="hs-admin-trash g-font-size-18  g-mr-10 g-mr-15--md"
+                        style="color:#F44336"
+                      ></i>
+                    </a>
+                  </div>
+                </td>
+              </tr>
+              <%})%>
+            </tbody>
+          </table>
+        </div>
+        <%}else{%>
+        <h2 class="texr-center" style="text-align: center">
+          This customer has't add a product
+        </h2>
+        <%}%> <%include ./partials/footer%>
+      </div>
+    </div>
+  </div>
+</main>
