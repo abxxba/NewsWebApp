@@ -148,5 +148,25 @@ router.post("/upload-image/:id", (req, res) => {
 
 router.post("/add-image/:id", uploadImage);
 
+/* get featured news */
+router.get("/featured", (req, res) => {
+  NewsModel.find({ isFeatured: true }).then(news => {
+    res.json(news);
+  });
+});
+
+/* get trending news */
+router.get("/trending", (req, res) => {
+  NewsModel.find({})
+    .sort([["view", -1], ["date.created", -1]]) //sorting the highest view to the top of the array
+    .limit(10) //limiting viewing products to 10
+    .exec((err, trending) => {
+      if (err) {
+        console.log("err", err);
+      } else {
+        res.json(trending);
+      }
+    });
+});
 
 module.exports = router;
