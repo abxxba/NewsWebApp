@@ -44,13 +44,46 @@ checkFileType = (file, cb) => {
 };
 
 uploadForAllSize = async (req, res) => {
+  let largeImageReturned = null;
+  let mediumImageReturned = null;
+  let smallImageReturned = null;
+  const done = function(ret, con) {
+    con == 0
+      ? (largeImageReturned = ret)
+      : con == 1
+      ? (mediumImageReturned = ret)
+      : con == 2
+      ? (smallImageReturned = ret)
+      : null;
+
+    if (
+      largeImageReturned != null &&
+      mediumImageReturned != null &&
+      smallImageReturned != null
+    ) {
+      const imagePath = {};
+      imagePath.image = {};
+      imagePath.image = {
+        thumbnail: smallImageReturned,
+        medium: mediumImageReturned,
+        large: largeImageReturned
+      };
+      NewsModel.findByIdAndUpdate(
+        req.params.id,
+        { $set: imagePath },
+        { new: true }
+      ).then(news => res.json(news));
+    }
+  };
   /* upload large image */
   uploadImageByPath(
     req,
     res,
     config.ImageLarge_Width,
     config.ImageLarge_Height,
-    config._dirLargeImage
+    config._dirLargeImage,
+    done,
+    config.imageLargeConstant
   );
   /* upload medium image */
   uploadImageByPath(
@@ -58,7 +91,9 @@ uploadForAllSize = async (req, res) => {
     res,
     config.ImageMedium_Width,
     config.ImageMedium_Height,
-    config._dirMediumImage
+    config._dirMediumImage,
+    done,
+    config.imageMediumConstant
   );
   /* upload small image */
   uploadImageByPath(
@@ -66,11 +101,15 @@ uploadForAllSize = async (req, res) => {
     res,
     config.ImageSmall_Width,
     config.ImageSmall_Height,
-    config._dirSmallImage
+    config._dirSmallImage,
+    done,
+    config.imageSmallConstant
   );
 };
 
-uploadImageByPath = async (req, res, width, height, imagePath) => {
+uploadImageByPath = async (req, res, width, height, imagePath, done, con) => {
+  let image = null;
+
   await upload(req, res, err => {
     if (err) {
       console.log("err", err);
@@ -82,7 +121,6 @@ uploadImageByPath = async (req, res, width, height, imagePath) => {
       }
     } else {
       //STORING THE PATH TO THE DATABASE
-      let image = null;
 
       if (req.file) {
         filename = path.basename(req.file.path);
@@ -97,8 +135,8 @@ uploadImageByPath = async (req, res, width, height, imagePath) => {
 
         if (filename) {
           image = "/public/uploads/" + imagePath + "/" + filename;
-          const news = NewsModel.findById(req.params.id);
-          console.log("news", image);
+
+          done(image, con);
         }
       }
     }
@@ -108,6 +146,5 @@ uploadImageByPath = async (req, res, width, height, imagePath) => {
 module.exports = {
   uploadImage: async (req, res) => {
     uploadForAllSize(req, res);
-    res.json("uploaded suceessfully!");
   }
 };

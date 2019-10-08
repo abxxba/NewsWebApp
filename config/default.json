@@ -9,12 +9,15 @@
   "ImageLarge_Width": 1280,
   "ImageLarge_Height": 750,
   "_dirLargeImage": "large",
+  "imageLargeConstant": 0,
 
   "ImageMedium_Width": 640,
   "ImageMedium_Height": 480,
   "_dirMediumImage": "medium",
+  "imageMediumConstant": 1,
 
   "ImageSmall_Width": 320,
   "ImageSmall_Height": 240,
-  "_dirSmallImage": "thumbnail"
+  "_dirSmallImage": "thumbnail",
+  "imageSmallConstant": 2
 }
